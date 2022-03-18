@@ -1,9 +1,9 @@
 const axios = require('axios');
 const _ = require("lodash");
 
-const search_movie = async function (req, res) {
+const search = async function (req, res) {
     const query = _.toLower(req.body.name);
-    const response = await axios.get("https://api.themoviedb.org/3/search/movie?api_key=" + process.env.TMDB_API_KEY + "&query=" + query);
+    const response = await axios.get("https://api.themoviedb.org/3/search/multi?api_key=" + process.env.TMDB_API_KEY + "&query=" + query);
     try {
         res.json(response.data.results);
     } catch (error) {
@@ -12,16 +12,6 @@ const search_movie = async function (req, res) {
     }
 };
 
-const search_tv = async function (req, res) {
-    const query = _.toLower(req.body.name);
-    const response = await axios.get("https://api.themoviedb.org/3/search/tv?api_key=" + process.env.TMDB_API_KEY + "&query=" + query);
-    try {
-        res.json(response.data.results);
-    } catch (error) {
-        res.send({ message: "SOMETHING WENT WRONG" });
-        console.log(error);
-    }
-};
 
 const search_movie_by_id = async function (req, res) {
     const id = req.params.id;
@@ -66,4 +56,4 @@ const trendig_tv = async function (req, res) {
     }
 };
 
-module.exports = { search_movie, search_tv, search_movie_by_id, search_tv_by_id, trendig_movie, trendig_tv };
+module.exports = { search, search_movie_by_id, search_tv_by_id, trendig_movie, trendig_tv };
