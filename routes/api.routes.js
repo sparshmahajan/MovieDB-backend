@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { search, search_movie_by_id, search_tv_by_id, trending_movie, trending_tv, popular_movie, popular_tv, latest_movie, latest_tv, top_rated_movie, top_rated_tv, upcoming_movie, on_the_air } = require('../controllers/api.controller')
 
-router.get('/search', search);
+router.get('/search/:name', search);
 router.get('/search_movie/:id', search_movie_by_id);
 router.get('/search_tv/:id', search_tv_by_id);
 router.get('/trending_movie', trending_movie);
