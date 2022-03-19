@@ -2,7 +2,7 @@ const axios = require('axios');
 const _ = require("lodash");
 
 const search = async function (req, res) {
-    const query = _.toLower(req.params.name);
+    const query = _.toLower(req.body.name);
     const response = await axios.get("https://api.themoviedb.org/3/search/multi?api_key=" + process.env.TMDB_API_KEY + "&query=" + query);
     try {
         res.json(response.data.results);
