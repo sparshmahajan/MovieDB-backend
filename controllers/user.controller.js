@@ -9,12 +9,12 @@ const signup = function (req, res) {
     const email = _.toLower(req.body.email);
     const password = req.body.password;
 
+
     User.findOne({ email: email }, async function (error, foundUser) {
         if (foundUser) {
             res.status(400).send({ message: "Account Already exists." });
         } else {
             const encryptedPassword = await Encrypt(password);
-            console.log(encryptedPassword);
             const user = new User({
                 name: name,
                 email: email,

@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt');
-const res = require('express/lib/response');
 
 const saltRounds = 10;
 
