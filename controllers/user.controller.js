@@ -54,7 +54,6 @@ const login = function (req, res) {
             }
         } else {
             res.status(400).send({ message: "User Not Found." });
-            console.log(error);
         }
     });
 };

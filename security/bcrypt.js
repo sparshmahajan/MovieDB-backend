@@ -4,9 +4,7 @@ const saltRounds = 10;
 
 //encryption
 const Encrypt = async (Epassword) => {
-    console.log(Epassword);
     const hash = await bcrypt.hash(Epassword, saltRounds);
-
     return hash;
 }
 
