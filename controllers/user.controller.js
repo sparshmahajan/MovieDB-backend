@@ -53,7 +53,7 @@ const login = function (req, res) {
                 res.status(400).send({ message: "Incorrect Password." })
             }
         } else {
-            res.send({ message: "User Not Found." });
+            res.status(400).send({ message: "User Not Found." });
             console.log(error);
         }
     });
