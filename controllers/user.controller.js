@@ -40,7 +40,7 @@ const login = function (req, res) {
         if (foundUser) {
             const result = await Decrypt(password, foundUser.password);
             if (result === true) {
-                const token = await getToken({ userId: foundUser._id });
+                const token = getToken({ userId: foundUser._id });
                 res.cookie("token", token);
                 const { name, email } = foundUser;
                 res.json({
