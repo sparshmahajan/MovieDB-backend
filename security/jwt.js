@@ -7,21 +7,5 @@ const getToken = function (data) {
     return token;
 };
 
-const Authenticate = async function (req, res, next) {
-    let token = req.cookies.token;
-    let jwtSecretKey = process.env.APP_SECRET;
-    try {
-        const verified = await jwt.verify(token, jwtSecretKey);
-        if (verified) {
-            req.user = verified;
-            next();
-        } else {
-            return res.redirect("/");
-        }
-    } catch (error) {
-        console.log(error);
-        return res.redirect("/");
-    }
-};
 
-module.exports = { Authenticate, getToken };
+module.exports = { getToken };
