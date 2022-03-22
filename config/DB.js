@@ -16,7 +16,10 @@ const userSchema = new mongoose.Schema({
     name: String,
     email: String,
     password: String,
-    movie: [movieSchema],
+    movie: {
+        type: [movieSchema],
+        default: [],
+    },
     created_at: {
         type: Date,
         default: Date.now

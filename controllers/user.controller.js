@@ -41,7 +41,7 @@ const login = function (req, res) {
             const result = await Decrypt(password, foundUser.password);
             if (result === true) {
                 const token = getToken({ userId: foundUser._id });
-                res.cookie("token", token);
+                res.cookie("token", { token_id: token, user_id: foundUser._id });
                 const { name, email } = foundUser;
                 res.json({
                     name: name,
@@ -88,7 +88,13 @@ const addWatch = function (req, res) {
 const removeWatch = function (req, res) {
     const id = req.body.id;
 
-    User.findOneAndUpdate({ _id: req.user.userId }, { $pull: { movies_id: id } }, function (err) {
+    User.findOneAndUpdate({ _id: req.user.userId }, {
+        $pull: {
+            movie: {
+                movie_id: id
+            }
+        }
+    }, function (err) {
         if (err) {
             console.log(err);
             res.status(400).send({ message: "Error while removing to watchlist." });
@@ -100,16 +106,33 @@ const removeWatch = function (req, res) {
 
 const deleteWatch = function (req, res) {
 
-    User.findOneAndUpdate({ _id: req.user.userId }, { $set: { movies_id: [] } }, function (err) {
+    User.findOneAndUpdate({ _id: req.user.userId },
+        {
+            $set: {
+                movie: []
+            }
+        }, function (err) {
+            if (err) {
+                console.log(err);
+                res.status(400).send({ message: "Error while deleting to watchlist." });
+            } else {
+                res.send({ message: "Successfully deleted" });
+            }
+        })
+}
+
+const getWatch = function (req, res) {
+    User.findOne({ _id: req.user.userId }, function (err, foundUser) {
         if (err) {
             console.log(err);
-            res.status(400).send({ message: "Error while deleting to watchlist." });
+            res.status(400).send({ message: "Error while getting watchlist." });
         } else {
-            res.send({ message: "Successfully deleted" });
+            res.send(foundUser.movie);
         }
     })
 }
 
 
 
-module.exports = { signup, login, addWatch, removeWatch, deleteWatch };
+
+module.exports = { signup, login, addWatch, removeWatch, deleteWatch, getWatch };
