@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { search, search_movie_by_id, search_tv_by_id, trending_movie, trending_tv, popular_movie, popular_tv, latest_movie, latest_tv, top_rated_movie, top_rated_tv, upcoming_movie, on_the_air } = require('../controllers/api.controller')
+const { search, search_movie_by_id, search_tv_by_id, trending_movie, trending_tv, popular_movie, popular_tv, latest_movie, latest_tv, top_rated_movie, top_rated_tv, upcoming_movie, on_the_air, recommendations_movies, recommendations_tv, similar_movies, similar_tv } = require('../controllers/api.controller')
 
 router.get('/search/:name', search);
 router.get('/search_movie/:id', search_movie_by_id);
@@ -15,5 +15,10 @@ router.get('/top_rated_movie', top_rated_movie);
 router.get('/top_rated_tv', top_rated_tv);
 router.get('/upcoming_movie', upcoming_movie);
 router.get('/on_the_air', on_the_air);
+router.get('/recommendations_movies/:id', recommendations_movies);
+router.get('/recommendations_tv/:id', recommendations_tv);
+router.get('/similar_movies/:id', similar_movies);
+router.get('/similar_tv/:id', similar_tv);
+
 
 module.exports = router;

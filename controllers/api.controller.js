@@ -136,4 +136,49 @@ const on_the_air = async function (req, res) {
     }
 };
 
-module.exports = { search, search_movie_by_id, search_tv_by_id, trending_movie, trending_tv, popular_movie, popular_tv, top_rated_movie, top_rated_tv, latest_movie, latest_tv, upcoming_movie, on_the_air };
+const recommendations_movies = async function (req, res) {
+    const id = req.params.id;
+    try {
+        const response = await axios.get("https://api.themoviedb.org/3/movie/" + id + "/recommendations?api_key=" + process.env.TMDB_API_KEY);
+        res.json(response.data.results);
+    } catch (error) {
+        res.send({ message: "SOMETHING WENT WRONG" });
+        console.log(error);
+    }
+};
+
+const recommendations_tv = async function (req, res) {
+    const id = req.params.id;
+    try {
+        const response = await axios.get("https://api.themoviedb.org/3/tv/" + id + "/recommendations?api_key=" + process.env.TMDB_API_KEY);
+        res.json(response.data.results);
+    } catch (error) {
+        res.send({ message: "SOMETHING WENT WRONG" });
+        console.log(error);
+    }
+};
+
+const similar_tv = async function (req, res) {
+    const id = req.params.id;
+    try {
+        const response = await axios.get("https://api.themoviedb.org/3/tv/" + id + "/similar?api_key=" + process.env.TMDB_API_KEY);
+        res.json(response.data.results);
+    } catch (error) {
+        res.send({ message: "SOMETHING WENT WRONG" });
+        console.log(error);
+    }
+};
+
+const similar_movie = async function (req, res) {
+    const id = req.params.id;
+    try {
+        const response = await axios.get("https://api.themoviedb.org/3/movie/" + id + "/similar?api_key=" + process.env.TMDB_API_KEY);
+        res.json(response.data.results);
+    } catch (error) {
+        res.send({ message: "SOMETHING WENT WRONG" });
+        console.log(error);
+    }
+};
+
+
+module.exports = { search, search_movie_by_id, search_tv_by_id, trending_movie, trending_tv, popular_movie, popular_tv, top_rated_movie, top_rated_tv, latest_movie, latest_tv, upcoming_movie, on_the_air, recommendations_movies, recommendations_tv, similar_tv, similar_movies };
