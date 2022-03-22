@@ -169,7 +169,7 @@ const similar_tv = async function (req, res) {
     }
 };
 
-const similar_movie = async function (req, res) {
+const similar_movies = async function (req, res) {
     const id = req.params.id;
     try {
         const response = await axios.get("https://api.themoviedb.org/3/movie/" + id + "/similar?api_key=" + process.env.TMDB_API_KEY);
