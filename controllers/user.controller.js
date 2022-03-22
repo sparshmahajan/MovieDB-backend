@@ -60,8 +60,22 @@ const login = function (req, res) {
 
 const addWatch = function (req, res) {
     const id = req.body.id;
+    const type = req.body.type;
 
-    User.findOneAndUpdate({ _id: req.user.userId }, { $push: { movies_id: { $each: [id], $position: 0 } } }, function (err) {
+    const movieObj = {
+        movie_id: id,
+        type: type
+    };
+
+
+    User.findOneAndUpdate({ _id: req.user.userId }, {
+        $push: {
+            movie: {
+                $each: [movieObj],
+                $position: 0
+            }
+        }
+    }, function (err) {
         if (err) {
             console.log(err);
             res.status(400).send({ message: "Error while adding to watchlist." });

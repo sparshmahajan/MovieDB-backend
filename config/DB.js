@@ -1,6 +1,6 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
-const underscore = require('underscore');
+const movieSchema = require('./movieSchema');
 
 const dbUrl = process.env.MONGO_URL || "mongodb://localhost:27017/userDB";
 
@@ -16,10 +16,7 @@ const userSchema = new mongoose.Schema({
     name: String,
     email: String,
     password: String,
-    google_id: String,
-    movies_id: [{
-        type: String
-    }],
+    movie: [movieSchema],
     created_at: {
         type: Date,
         default: Date.now
