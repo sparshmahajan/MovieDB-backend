@@ -15,8 +15,8 @@ router.get('/top_rated_movie', top_rated_movie);
 router.get('/top_rated_tv', top_rated_tv);
 router.get('/upcoming_movie', upcoming_movie);
 router.get('/on_the_air', on_the_air);
-router.get('/recommendations_movies/:id', recommendations_movies);
-router.get('/recommendations_tv/:id', recommendations_tv);
+router.get('/recommended_movies/:id', recommendations_movies);
+router.get('/recommended_tv/:id', recommendations_tv);
 router.get('/similar_movies/:id', similar_movies);
 router.get('/similar_tv/:id', similar_tv);
 
