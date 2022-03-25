@@ -26,6 +26,7 @@ const signup = function (req, res) {
                 }
                 else {
                     res.status(400).send({ message: "Error while saving data." });
+                    console.log(e);
                 }
             });
         }
@@ -42,11 +43,12 @@ const login = function (req, res) {
             if (result === true) {
                 const token = getToken({ userId: foundUser._id });
                 res.cookie("token", token);
-                const { name, email } = foundUser;
+                const { name, email, movie } = foundUser;
                 res.json({
                     name: name,
                     email: email,
                     token: token,
+                    movie: movie,
                     message: "Login Successful",
                 });
             } else {
@@ -64,10 +66,8 @@ const addWatch = function (req, res) {
 
     const movieObj = {
         movie_id: id,
-        type: type
+        media_type: type
     };
-
-
     User.findOneAndUpdate({ _id: req.user.userId }, {
         $push: {
             movie: {
@@ -75,12 +75,16 @@ const addWatch = function (req, res) {
                 $position: 0
             }
         }
-    }, function (err) {
+    }, { new: true }, function (err, result) {
         if (err) {
             console.log(err);
             res.status(400).send({ message: "Error while adding to watchlist." });
         } else {
-            res.send({ message: "Successfully added" });
+            const { movie } = result;
+            res.json({
+                movie: movie,
+                message: "Successfully added"
+            });
         }
     })
 }
@@ -94,12 +98,16 @@ const removeWatch = function (req, res) {
                 movie_id: id
             }
         }
-    }, function (err) {
+    }, { new: true }, function (err, result) {
         if (err) {
             console.log(err);
             res.status(400).send({ message: "Error while removing to watchlist." });
         } else {
-            res.send({ message: "Successfully removed" });
+            const { movie } = result;
+            res.json({
+                movie: movie,
+                message: "Successfully removed"
+            });
         }
     })
 }

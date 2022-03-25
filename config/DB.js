@@ -13,12 +13,21 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true }, fun
 });
 
 const userSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    password: String,
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
     movie: {
-        type: [movieSchema],
-        default: [],
+        type: [movieSchema]
     },
     created_at: {
         type: Date,
