@@ -42,8 +42,8 @@ app.get("/", (req, res) => {
 });
 
 //routes
-app.use('/user', userRouter);
-app.use('/tmdb', apiRouter);
+app.use('/api', userRouter);
+app.use('/api', apiRouter);
 
 app.listen(port, function () {
     console.log(`Server started on port ${port}`);

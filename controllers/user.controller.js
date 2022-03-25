@@ -140,7 +140,4 @@ const getWatch = function (req, res) {
     })
 }
 
-
-
-
 module.exports = { signup, login, addWatch, removeWatch, deleteWatch, getWatch };
