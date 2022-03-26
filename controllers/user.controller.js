@@ -43,6 +43,7 @@ const login = function (req, res) {
             if (result === true) {
                 const token = getToken({ userId: foundUser._id });
                 res.cookie("token", token, { sameSite: 'None', secure: true, });
+                console.log(token);
                 const { name, email, movie } = foundUser;
                 res.json({
                     name: name,
