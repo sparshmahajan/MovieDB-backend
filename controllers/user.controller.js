@@ -42,7 +42,7 @@ const login = function (req, res) {
             const result = await Decrypt(password, foundUser.password);
             if (result === true) {
                 const token = getToken({ userId: foundUser._id });
-                res.cookie("token", token, { sameSite: false, secure: true, path: 'https://movie-db-brown.vercel.app' });
+                res.cookie("token", token, { sameSite: 'none', secure: true, path: '/signin' });
                 console.log(token);
                 const { name, email, movie } = foundUser;
                 res.json({
