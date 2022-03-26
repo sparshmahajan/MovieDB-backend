@@ -42,8 +42,6 @@ const login = function (req, res) {
             const result = await Decrypt(password, foundUser.password);
             if (result === true) {
                 const token = getToken({ userId: foundUser._id });
-                res.cookie("token", token, { sameSite: 'None', secure: true, path: '/' });
-                console.log(token);
                 const { name, email, movie } = foundUser;
                 res.json({
                     name: name,
