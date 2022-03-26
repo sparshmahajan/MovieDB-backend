@@ -10,7 +10,7 @@ const app = express();
 
 const port = process.env.PORT || 5000;
 
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(cors({ credentials: true, origin: "https://movie-db-leqs6ryz7-sparshmahajan.vercel.app" }));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
