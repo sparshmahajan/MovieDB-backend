@@ -8,7 +8,7 @@ const apiRouter = require("./routes/api.routes");
 
 const app = express();
 
-const port = process.env.port || 5000;
+const port = process.env.PORT || 5000;
 
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(logger("dev"));
