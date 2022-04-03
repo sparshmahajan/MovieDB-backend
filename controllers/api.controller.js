@@ -1,6 +1,7 @@
 const axios = require('axios');
 const _ = require("lodash");
 
+
 const search = async function (req, res) {
     const query = _.toLower(req.params.name);
     const response = await axios.get("https://api.themoviedb.org/3/search/multi?api_key=" + process.env.TMDB_API_KEY + "&query=" + query);
@@ -179,6 +180,9 @@ const similar_movies = async function (req, res) {
         console.log(error);
     }
 };
+
+
+
 
 
 module.exports = { search, search_movie_by_id, search_tv_by_id, trending_movie, trending_tv, popular_movie, popular_tv, top_rated_movie, top_rated_tv, latest_movie, latest_tv, upcoming_movie, on_the_air, recommendations_movies, recommendations_tv, similar_tv, similar_movies };

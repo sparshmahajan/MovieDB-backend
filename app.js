@@ -5,6 +5,7 @@ const logger = require("morgan");
 const cors = require("cors");
 const userRouter = require("./routes/user.routes");
 const apiRouter = require("./routes/api.routes");
+const torrentRouter = require("./routes/torrent.routes");
 
 const app = express();
 
@@ -44,6 +45,8 @@ app.get("/", (req, res) => {
 //routes
 app.use('/api', userRouter);
 app.use('/api', apiRouter);
+app.use('/api', torrentRouter);
+
 
 app.listen(port, function () {
     console.log(`Server started on port ${port}`);
