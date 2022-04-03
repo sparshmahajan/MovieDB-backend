@@ -5,6 +5,7 @@ const torrent = async (req, res) => {
     let id = req.params.id;
     let url = `https://yts.torrentbay.to/api/v2/list_movies.json?query_term=${id}`;
     let response = await axios.get(url);
+    console.log(response.data);
     let data = response.data.data.movies;
     let torrents = data[0].torrents;
     let torrents_array = [];
