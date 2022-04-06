@@ -11,7 +11,9 @@ const app = express();
 
 const port = process.env.PORT || 5000;
 
-app.use(cors({ credentials: true, origin: "https://movie-db-jet.vercel.app" }));
+const frontendUrl = "https://movie-db-jet.vercel.app";
+
+app.use(cors({ credentials: true, origin: frontendUrl }));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -21,7 +23,7 @@ app.use(cookieParser());
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'https://movie-db-jet.vercel.app');
+    res.setHeader('Access-Control-Allow-Origin', frontendUrl);
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
