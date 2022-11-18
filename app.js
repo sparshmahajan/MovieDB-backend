@@ -5,13 +5,12 @@ const logger = require("morgan");
 const cors = require("cors");
 const userRouter = require("./routes/user.routes");
 const apiRouter = require("./routes/api.routes");
-const torrentRouter = require("./routes/torrent.routes");
 
 const app = express();
 
 const port = process.env.PORT || 5000;
 
-const frontendUrl = "https://movie-db-jet.vercel.app";
+const frontendUrl = process.env.FRONTEND_URL;
 
 app.use(cors({ credentials: true, origin: frontendUrl }));
 app.use(logger("dev"));
@@ -46,7 +45,6 @@ app.get("/", (req, res) => {
 //routes
 app.use('/api', userRouter);
 app.use('/api', apiRouter);
-app.use('/api', torrentRouter);
 
 
 app.listen(port, function () {
