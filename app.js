@@ -1,12 +1,12 @@
 require("dotenv").config();
 const express = require("express");
-const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
 const userRouter = require("./routes/user.routes");
 const apiRouter = require("./routes/api.routes");
-
 const app = express();
+const ejs = require("ejs");
+const path = require("path");
 
 const port = process.env.PORT || 5000;
 
@@ -16,7 +16,9 @@ app.use(cors({ credentials: true, origin: frontendUrl }));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "public")));
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
 // Add headers
 app.use(function (req, res, next) {
