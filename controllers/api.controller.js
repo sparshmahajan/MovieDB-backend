@@ -1,8 +1,8 @@
 const axios = require('axios');
 const _ = require("lodash");
 
+const url = process.env.BACKEND_URL;
 const search = async function (req, res) {
-    const url = process.env.BACKEND_URL;
     const query = _.toLower(req.params.name);
     const response = await axios.get(`${url}/search/multi?api_key=${process.env.TMDB_API_KEY}&query=${query}`);
     try {
