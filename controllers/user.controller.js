@@ -206,7 +206,7 @@ const forgotPassword = function (req, res) {
                     subject: 'Reset Password',
                     html: `<h1>Reset Password</h1>
                 <p>Click on the link to reset your password</p>
-                <a href="http://localhost:5000/api/reset/${token}">Reset Password</a>`
+                <a href="${process.env.DEPLOYED_URL}/api/reset/${token}">Reset Password</a>`
                 };
                 transporter.sendMail(mailOptions, function (err, info) {
                     if (err) {
