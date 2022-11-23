@@ -42,7 +42,6 @@ const signup = function (req, res) {
 const login = function (req, res) {
     const email = _.toLower(req.body.email);
     const password = req.body.password;
-    console.log(email + " " + password);
     try {
         if (!email || !password) {
             res.status(400).send({ message: "Please enter all fields." });
