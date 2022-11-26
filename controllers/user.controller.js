@@ -188,6 +188,11 @@ const forgotPassword = function (req, res) {
                     refresh_token: process.env.REFRESH_TOKEN
                 });
 
+                var deployed_url = process.env.DEPLOYED_URL;
+                if(process.env.NODE_ENV === "development"){
+                    deployed_url = "http://localhost:5000";
+                }
+
                 const transporter = nodeMailer.createTransport({
                     service: 'gmail',
                     auth: {
@@ -205,7 +210,7 @@ const forgotPassword = function (req, res) {
                     subject: 'Reset Password',
                     html: `<h1>Reset Password</h1>
                 <p>Click on the link to reset your password</p>
-                <a href="${process.env.DEPLOYED_URL}/api/reset/${token}">Reset Password</a>`
+                <a href="${deployed_url}/api/reset/${token}">Reset Password</a>`
                 };
                 transporter.sendMail(mailOptions, function (err, info) {
                     if (err) {
